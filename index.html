@@ -1,120 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Meteor Shower Lights™ | Christmas Outdoor Decoration</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meteor Shower Lights</title>
 
 <style>
-  body {
+
+/* Global reset */
+body {
     margin: 0;
     padding: 0;
+    background: #001522;
     font-family: Arial, sans-serif;
-    background: #06101f;
-    color: white;
     overflow-x: hidden;
-  }
+}
 
-  /* Background overlay */
-  .bg-overlay {
-    background: url("background.png") no-repeat center center/cover;
+/* Background image overlay */
+.bg-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: 0.35;
+    background-image: url("background.png");
+    background-size: cover;
+    background-position: center;
     z-index: -1;
-  }
+}
 
-  /* HERO SECTION */
-  .hero {
+/* SALE TOP BAR */
+.sale-top {
+    width: 100%;
+    background: red;
+    padding: 12px 0;
     text-align: center;
-    padding: 80px 25px 40px;
-  }
-  .hero h1 {
-    font-size: 36px;
+    font-size: 22px;
+    color: #fff;
     font-weight: bold;
-    margin-bottom: 10px;
-  }
-  .hero p {
-    font-size: 16px;
-    opacity: 0.85;
-  }
+    letter-spacing: 1px;
+}
 
-  .buybtn {
-    display: inline-block;
-    margin-top: 20px;
-    background: #2ecc71;
-    padding: 12px 26px;
-    border-radius: 8px;
-    color: #000;
-    font-weight: bold;
-  }
-
-  /* VIDEO */
-  .video-wrapper {
-    display: flex;
-    justify-content: center;
-    margin-top: 28px;
-  }
-  .video-wrapper video {
-    width: 320px;
-    height: 180px;
-    border-radius: 10px;
-    object-fit: cover;
-    border: 2px solid rgba(255,255,255,0.45);
-  }
-
-  /* SNOW */
-  .snowflake {
+/* Snow animation */
+#snow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+.snowflake {
     position: fixed;
     top: -10px;
-    left: 0;
     color: white;
-    font-size: 1em;
+    opacity: 0.9;
     user-select: none;
     pointer-events: none;
     animation-name: fall;
     animation-timing-function: linear;
-  }
-
-  @keyframes fall {
-    0% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(100vh); opacity: 0; }
-  }
-</style>
-</head>
-
-<body>
-<div id="audio-toggle" class="audio-btn">🔊</div>
-
-<!-- SALE ENDS SOON - RED BANNER -->
-<div id="saleBanner" style="
-  width:100%;
-  background:#ff1a1a;
-  color:white;
-  padding:12px 0;
-  text-align:center;
-  font-size:18px;
-  font-weight:bold;
-  position:sticky;
-  top:0;
-  left:0;
-  z-index:9999;
-  box-shadow:0 0 12px rgba(0,0,0,0.45);
-  animation:pulse 1.4s infinite;
-">
-  🔥 SALE ENDS SOON — LIMITED STOCK AVAILABLE! 🔥
-</div>
-
-<style>
-@keyframes pulse {
-  0% { opacity:1; }
-  50% { opacity:0.65; }
-  100% { opacity:1; }
 }
-</style>
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+/* HERO SECTION */
+.hero {
+    text-align: center;
+    padding-top: 120px;
+    color: white;
+    text-shadow: 0px 0px 8px black;
+}
+
+.hero h1 {
+    font-size: 48px;
+    font-weight: 900;
+}
+
+.buy-btn {
+    background: #00c447;
+    padding: 18px 34px;
+    color: black;
+    font-size: 22px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+/* VIDEO SECTION */
+.video-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.video-container video {
+    width: 560px;
+    max-width: 90%;
+    border-radius: 12px;
+}
+
+/* LEFT & RIGHT BOXES */
+.floating-boxes {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: -220px;
+    padding: 0 60px;
+}
+
+.left-box, .right-box {
+    background: rgba(0,0,0,0.55);
+    padding: 25px 30px;
+    border-radius: 15px;
+    width: 300px;
+    text-align: center;
+    color: white;
+    font-size: 22px;
+    text-shadow: 0 0 4px black;
+}
+
+/* Countdown */
+.timer {
+    font-size: 44px;
+    margin-top: 10px;
+}
+
+/* AUDIO BUTTON */
 .audio-btn {
     position: fixed;
     bottom: 20px;
@@ -123,395 +141,123 @@
     color: #fff;
     padding: 12px 16px;
     border-radius: 50px;
-    font-size: 20px;
+    font-size: 22px;
     cursor: pointer;
     z-index: 9999;
     backdrop-filter: blur(4px);
     transition: 0.2s;
 }
-
 .audio-btn:hover {
     background: rgba(0,0,0,0.8);
 }
 
-<!-- MUSIC (fixed + works after first click) -->
-<audio id="bgm" src="bgmusic.mp3" loop></audio>
+</style>
+</head>
+<body>
 
-<script>
-document.addEventListener("click", function () {
-    const a = document.getElementById("bgm");
-    a.volume = 0.35;
-    a.play().catch(()=>{});
-}, { once: true });
-</script>
-
+<!-- BACKGROUND -->
 <div class="bg-overlay"></div>
+
+<!-- TOP SALE BAR -->
+<div class="sale-top">🔥 SALE ENDS SOON — LIMITED STOCK AVAILABLE! 🔥</div>
+
+<!-- SNOW -->
 <div id="snow"></div>
 
+<!-- AUDIO BUTTON -->
+<div id="audio-toggle" class="audio-btn">🔊</div>
+
+<!-- HERO TEXT -->
+<div class="hero">
+    <h1>Meteor Shower Lights™</h1>
+    <p>Transform your home into a magical winter wonderland.</p>
+    <button class="buy-btn">Buy Now – €4.62</button>
+</div>
+
+<!-- VIDEO + SIDE BOXES -->
+<div class="floating-boxes">
+    <div class="left-box">
+        🔥 BLACK FRIDAY SALE 🔥
+        <br><small>Up to 40% OFF Today Only</small>
+    </div>
+
+    <div class="right-box">
+        ⏳ Offer Ends In:
+        <div class="timer" id="countdown">03:00:00</div>
+    </div>
+</div>
+
+<div class="video-container">
+    <video src="meteorvideo.mp4" autoplay loop muted></video>
+</div>
+
+<!-- SNOW SCRIPT -->
 <script>
 function createSnow() {
-  const snow = document.getElementById("snow");
-  const flake = document.createElement("div");
+    const snow = document.getElementById("snow");
+    const snowflake = document.createElement("div");
 
-  flake.classList.add("snowflake");
-  flake.textContent = "❄";
+    snowflake.classList.add("snowflake");
+    snowflake.textContent = "❄";
 
-  flake.style.left = Math.random() * 100 + "vw";
-  flake.style.fontSize = (Math.random() * 12 + 8) + "px";
-  flake.style.opacity = Math.random();
-  flake.style.animationDuration = (Math.random() * 3 + 3) + "s";
+    const size = Math.random() * 8 + 8;
+    snowflake.style.fontSize = size + "px";
 
-  snow.appendChild(flake);
-  setTimeout(()=> flake.remove(), 6000);
+    snowflake.style.left = Math.random() * 100 + "vw";
+    snowflake.style.opacity = Math.random();
+    snowflake.style.animationDuration = Math.random() * 3 + 3 + "s";
+
+    snow.appendChild(snowflake);
+
+    setTimeout(() => {
+        snowflake.remove();
+    }, 6000);
 }
+
 setInterval(createSnow, 120);
 </script>
 
-
-<!-- HERO SECTION -->
-<div class="hero">
-  <h1>Meteor Shower Lights™</h1>
-  <p>Transform your home into a magical winter wonderland.</p>
-
-  <a class="buybtn" href="https://s.click.aliexpress.com/e/_c4NpFYml">Buy Now – €4.62</a>
-
- <!-- VIDEO + BLACK FRIDAY + COUNTDOWN -->
-<div style="
-  display:flex; 
-  justify-content:center; 
-  align-items:center; 
-  gap:25px; 
-  margin-top:35px;
-  flex-wrap:wrap;
-">
-
-  <!-- LEFT SIDE – BLACK FRIDAY -->
-  <div style="
-    width:220px; 
-    text-align:center; 
-    background:rgba(0,0,0,0.55); 
-    padding:15px; 
-    border-radius:12px; 
-    border:1px solid rgba(255,255,255,0.3);
-  ">
-    <h2 style="font-size:22px; margin:0; color:#ffdd33;">🔥 BLACK FRIDAY SALE 🔥</h2>
-    <p style="margin:8px 0 0; font-size:14px; opacity:0.85;">Up to 40% OFF Today Only</p>
-  </div>
-
-  <!-- VIDEO -->
-  <div class="video-wrapper">
-    <video src="meteorvideo.mp4" autoplay muted loop playsinline 
-      style="width:320px; height:180px; border-radius:10px; border:2px solid rgba(255,255,255,0.45);">
-    </video>
-  </div>
-
-  <!-- RIGHT SIDE – COUNTDOWN -->
-  <div style="
-    width:220px; 
-    text-align:center; 
-    background:rgba(0,0,0,0.55); 
-    padding:15px; 
-    border-radius:12px; 
-    border:1px solid rgba(255,255,255,0.3);
-  ">
-    <h3 style="font-size:18px; margin:0 0 8px; color:#7cf0ff;">⏳ Offer Ends In:</h3>
-    <div id="timer" style="font-size:24px; font-weight:bold;">
-      00:00:00
-    </div>
-  </div>
-
-</div>
-
-<!-- COUNTDOWN SCRIPT -->
+<!-- COUNTDOWN TIMER -->
 <script>
-function startCountdown(hours=3) {
-  let end = Date.now() + hours*60*60*1000;
+let time = 3 * 60 * 60;
+const countdownEl = document.getElementById("countdown");
 
-  function update() {
-    let now = Date.now();
-    let diff = end - now;
-
-    if (diff <= 0) {
-      document.getElementById("timer").textContent = "00:00:00";
-      return;
-    }
-
-    let h = Math.floor(diff / (1000*60*60));
-    let m = Math.floor((diff % (1000*60*60)) / (1000*60));
-    let s = Math.floor((diff % (1000*60)) / 1000);
-
-    document.getElementById("timer").textContent =
-      String(h).padStart(2,'0') + ":" +
-      String(m).padStart(2,'0') + ":" +
-      String(s).padStart(2,'0');
-  }
-
-  update();
-  setInterval(update, 1000);
-}
-
-startCountdown(3); 
+setInterval(() => {
+    time--;
+    let h = String(Math.floor(time / 3600)).padStart(2,"0");
+    let m = String(Math.floor((time % 3600)/60)).padStart(2,"0");
+    let s = String(time % 60).padStart(2,"0");
+    countdownEl.textContent = `${h}:${m}:${s}`;
+}, 1000);
 </script>
 
-<!-- GALLERY SECTION -->
-<div class="gallery" style="
-  display:flex; 
-  justify-content:center; 
-  gap:20px; 
-  margin-top:50px;">
-  
-  <img src="img1.jpg" style="
-    width:280px; 
-    height:180px; 
-    border-radius:12px; 
-    object-fit:cover; 
-    border:2px solid rgba(255,255,255,0.4);">
-
-  <img src="img2.jpg" style="
-    width:280px; 
-    height:180px; 
-    border-radius:12px; 
-    object-fit:cover; 
-    border:2px solid rgba(255,255,255,0.4);">
-
-  <img src="img3.jpg" style="
-    width:280px; 
-    height:180px; 
-    border-radius:12px; 
-    object-fit:cover; 
-    border:2px solid rgba(255,255,255,0.4);">
-</div>
-
-
-<!-- BENEFITS -->
-<h2 style="text-align:center; margin-top:60px; font-size:28px;">Why You'll Love Them</h2>
-
-<div style="
-  display:flex; 
-  justify-content:center; 
-  flex-wrap:wrap; 
-  gap:20px; 
-  margin-top:25px;">
-
-  <div style="
-    width:260px; 
-    padding:20px; 
-    border-radius:12px; 
-    background:rgba(255,255,255,0.09); 
-    border:1px solid rgba(255,255,255,0.25);">
-    <h3 style="margin-bottom:8px;">✨ Real Meteor Effect</h3>
-    <p>Beautiful falling star animation</p>
-  </div>
-
-  <div style="
-    width:260px; 
-    padding:20px; 
-    border-radius:12px; 
-    background:rgba(255,255,255,0.09); 
-    border:1px solid rgba(255,255,255,0.25);">
-    <h3 style="margin-bottom:8px;">💡 Super Bright LEDs</h3>
-    <p>Extremely vivid illumination</p>
-  </div>
-
-  <div style="
-    width:260px; 
-    padding:20px; 
-    border-radius:12px; 
-    background:rgba(255,255,255,0.09); 
-    border:1px solid rgba(255,255,255,0.25);">
-    <h3 style="margin-bottom:8px;">🌧 Waterproof IP65</h3>
-    <p>Safe for all weather</p>
-  </div>
-
-  <div style="
-    width:260px; 
-    padding:20px; 
-    border-radius:12px; 
-    background:rgba(255,255,255,0.09); 
-    border:1px solid rgba(255,255,255,0.25);">
-    <h3 style="margin-bottom:8px;">🔌 Easy Plug & Play</h3>
-    <p>Just plug it in and enjoy</p>
-  </div>
-
-</div>
-
-
-
-<!-- BUNDLES SECTION -->
-<h2 style="text-align:center; margin-top:60px; font-size:28px;">Choose Your Bundle</h2>
-
-<div style="
-  display:flex; 
-  flex-wrap:wrap; 
-  justify-content:center; 
-  gap:25px; 
-  margin-top:25px;">
-
-  <div style="
-    width:270px; 
-    padding:20px; 
-    border-radius:14px; 
-    background:rgba(255,255,255,0.08); 
-    border:1px solid rgba(255,255,255,0.3); 
-    text-align:center;">
-    <h3>30cm – 8 Tubes</h3>
-    <p style="font-size:26px; margin:10px 0; color:#2ecc71; font-weight:bold;">€4.62</p>
-    <a class="buybtn" href="https://s.click.aliexpress.com/e/_c4NpFYml">Buy Now</a>
-  </div>
-
-  <div style="
-    width:270px; 
-    padding:20px; 
-    border-radius:14px; 
-    background:rgba(255,255,255,0.08); 
-    border:1px solid rgba(255,255,255,0.3); 
-    text-align:center;">
-    <h3>30cm – 16 Tubes</h3>
-    <p style="font-size:26px; margin:10px 0; color:#2ecc71; font-weight:bold;">€7.99</p>
-    <a class="buybtn" href="https://s.click.aliexpress.com/e/_c4NpFYml">Buy Now</a>
-  </div>
-
-  <div style="
-    width:270px; 
-    padding:20px; 
-    border-radius:14px; 
-    background:rgba(255,255,255,0.08); 
-    border:1px solid rgba(255,255,255,0.3); 
-    text-align:center;">
-    <h3>30cm – 24 Tubes</h3>
-    <p style="font-size:26px; margin:10px 0; color:#2ecc71; font-weight:bold;">€11.99</p>
-    <a class="buybtn" href="https://s.click.aliexpress.com/e/_c4NpFYml">Buy Now</a>
-  </div>
-
-</div>
-</div>
-<!-- SPECIFICATIONS -->
-<h2 style="text-align:center; margin-top:70px; font-size:28px;">Technical Specifications</h2>
-
-<div style="
-  display:flex; 
-  justify-content:center; 
-  flex-wrap:wrap; 
-  gap:25px; 
-  margin-top:35px;">
-
-  <div style="
-    width:300px; 
-    padding:20px; 
-    border-radius:14px; 
-    background:rgba(255,255,255,0.07); 
-    border:1px solid rgba(255,255,255,0.25);">
-    <h3>Product Details</h3>
-    <p>• Tube length: 30cm<br>
-       • LEDs per tube: 24<br>
-       • Waterproof rating: IP65<br>
-       • Lifespan: 50,000 hours<br>
-       • Voltage: 110–220V<br>
-       • Plug type: EU</p>
-  </div>
-
-  <div style="
-    width:300px; 
-    padding:20px; 
-    border-radius:14px; 
-    background:rgba(255,255,255,0.07); 
-    border:1px solid rgba(255,255,255,0.25);">
-    <h3>Perfect For</h3>
-    <p>• Christmas decorations<br>
-       • Roof edges<br>
-       • Trees & gardens<br>
-       • Balconies<br>
-       • Outdoor parties<br>
-       • Winter ambience</p>
-  </div>
-
-</div>
-
-
-<!-- REVIEWS SECTION -->
-<h2 style="text-align:center; margin-top:70px; font-size:28px;">Customer Reviews</h2>
-
-<div style="
-  display:flex; 
-  justify-content:center; 
-  flex-wrap:wrap; 
-  gap:25px; 
-  margin-top:35px;">
-
-  <div style="
-    width:320px; 
-    padding:20px; 
-    border-radius:14px; 
-    background:rgba(255,255,255,0.08); 
-    border:1px solid rgba(255,255,255,0.28);">
-    <h3>⭐⭐⭐⭐⭐</h3>
-    <p>“Beautiful lights, exactly like falling stars. My house looks amazing.”</p>
-    <p style="opacity:0.7; margin-top:10px;">— Anna</p>
-  </div>
-
-  <div style="
-    width:320px; 
-    padding:20px; 
-    border-radius:14px; 
-    background:rgba(255,255,255,0.08); 
-    border:1px solid rgba(255,255,255,0.28);">
-    <h3>⭐⭐⭐⭐⭐</h3>
-    <p>“Bright, waterproof, very beautiful at night. Fast shipping too.”</p>
-    <p style="opacity:0.7; margin-top:10px;">— Marko</p>
-  </div>
-
-  <div style="
-    width:320px; 
-    padding:20px; 
-    border-radius:14px; 
-    background:rgba(255,255,255,0.08); 
-    border:1px solid rgba(255,255,255,0.28);">
-    <h3>⭐⭐⭐⭐⭐</h3>
-    <p>“Ordered 3 sets. Perfect for my Christmas decorations!”</p>
-    <p style="opacity:0.7; margin-top:10px;">— Jelena</p>
-  </div>
-
-</div>
-
-
-<!-- FOOTER -->
-<footer style="
-  margin-top:70px; 
-  padding:25px; 
-  text-align:center; 
-  background:rgba(0,0,0,0.45); 
-  color:white; 
-  font-size:14px;">
-
-  <p>Meteor Shower Lights™ – Christmas Edition © 2024</p>
-  <p style="opacity:0.7; margin-top:5px;">Safe Checkout · Fast Delivery · Secure Payment</p>
-</footer>
+<!-- AUDIO SYSTEM -->
 <script>
-    const audio = new Audio("bgmusic.mp3");
-    audio.loop = true;
-    audio.volume = 0.5;
+const audio = new Audio("bgmusic.mp3");
+audio.loop = true;
+audio.volume = 0.45;
 
-    let audioStarted = false;
-    function startAudio() {
-        if (!audioStarted) {
-            audio.play();
-            audioStarted = true;
-        }
+let audioStarted = false;
+function startAudio() {
+    if (!audioStarted) {
+        audio.play().catch(()=>{});
+        audioStarted = true;
     }
-    document.addEventListener("click", startAudio);
-    document.addEventListener("scroll", startAudio);
+}
+document.addEventListener("click", startAudio);
+document.addEventListener("scroll", startAudio);
 
-    const toggleBtn = document.getElementById("audio-toggle");
+const toggleBtn = document.getElementById("audio-toggle");
 
-    toggleBtn.addEventListener("click", () => {
-        if (audio.paused) {
-            audio.play();
-            toggleBtn.textContent = "🔊";
-        } else {
-            audio.pause();
-            toggleBtn.textContent = "🔇";
-        }
-    });
+toggleBtn.addEventListener("click", () => {
+    if (audio.paused) {
+        audio.play();
+        toggleBtn.textContent = "🔊";
+    } else {
+        audio.pause();
+        toggleBtn.textContent = "🔇";
+    }
+});
 </script>
 
 </body>
